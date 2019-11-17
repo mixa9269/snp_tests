@@ -37,6 +37,16 @@ module Api
         render json: tests, each_serializer: TestSerializer
       end
 
+      def show
+        app_test = AppTest.find_by(id: params[:id])
+
+        raise Exceptions::NotFound unless app_test
+
+        verify_scope_key(app_test.scope_key)
+
+        render json: app_test, serializer: TestSerializer
+      end
+
       private
 
       def test_params
