@@ -1,3 +1,10 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  namespace :api do
+    namespace :v1 do
+      get 'tests/', to: 'app_tests#index'
+      post '/tests/', to: 'app_tests#create'
+      patch '/tests/:id/', to: 'app_tests#update'
+      delete '/tests/:id/', to: 'app_tests#destroy'
+    end
+  end
 end
