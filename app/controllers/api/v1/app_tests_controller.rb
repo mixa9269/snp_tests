@@ -32,7 +32,10 @@ module Api
       end
 
       def index
-        tests = AppTest.where(scope_key: scope_key).page(params[:page]).per(params[:per])
+        tests = AppTest.where(scope_key: scope_key)
+                       .where('title LIKE :search', search: "%#{params[:search]}%")
+                       .page(params[:page])
+                       .per(params[:per])
 
         render json: {
           tests: ActiveModel::SerializableResource.new(tests, each_serializer: TestSerializer),
