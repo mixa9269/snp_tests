@@ -6,9 +6,9 @@ module Api
       def create
         app_test = AppTest.find_by(id: params[:test_id])
 
-        verify_scope_key(app_test.scope_key)
-
         raise Exceptions::NotFound unless app_test
+
+        verify_scope_key(app_test.scope_key)
 
         outcome = Questions::Create.run(question_params(app_test))
         render_single_outcome(outcome, QuestionSerializer)
