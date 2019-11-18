@@ -12,6 +12,10 @@ Rails.application.routes.draw do
       post '/tests/:test_id/questions', to: 'questions#create'
       patch '/questions/:id', to: 'questions#update'
       delete '/questions/:id', to: 'questions#destroy'
+
+      post '/questions/:question_id/answers', to: 'answers#create'
+      patch '/answers/:id', to: 'answers#update'
+      delete '/answers/:id', to: 'answers#destroy'
     end
   end
 end
