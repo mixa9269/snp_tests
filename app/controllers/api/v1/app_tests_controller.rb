@@ -33,7 +33,7 @@ module Api
 
       def index
         tests = AppTest.where(scope_key: scope_key)
-                       .where('title LIKE :search', search: "%#{params[:search]}%")
+                       .where('lower(title) LIKE :search', search: "%#{params[:search]}%")
                        .page(params[:page])
                        .per(params[:per])
 
