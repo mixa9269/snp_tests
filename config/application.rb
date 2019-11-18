@@ -32,6 +32,7 @@ module SnpTests
     # Skip views, helpers and assets when generating a new resource.
     config.autoload_paths += Dir.glob("#{config.root}/app/concerns/*")
     config.autoload_paths += Dir.glob("#{config.root}/app/interactions/*")
+    config.autoload_paths += Dir.glob("#{config.root}/app/helpers/*")
     config.api_only = true
   end
 end

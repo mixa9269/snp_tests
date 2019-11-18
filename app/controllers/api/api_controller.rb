@@ -14,6 +14,10 @@ module Api
       render json: { error: 'not_found' }, status: :not_found
     end
 
+    rescue_from Exceptions::InvalidQuestionType do
+      render json: { error: 'invalid_question_type' }, status: :not_found
+    end
+
     def scope_key
       request.headers['scope-key']
     end

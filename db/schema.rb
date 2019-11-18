@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_17_092318) do
+ActiveRecord::Schema.define(version: 2019_11_17_124914) do
 
   create_table "app_tests", force: :cascade do |t|
     t.string "title"
     t.string "scope_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "title"
+    t.integer "question_type"
+    t.integer "answer"
+    t.integer "app_test_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["app_test_id"], name: "index_questions_on_app_test_id"
   end
 
 end
