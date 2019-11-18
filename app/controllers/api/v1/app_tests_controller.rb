@@ -32,9 +32,13 @@ module Api
       end
 
       def index
-        tests = AppTest.where(scope_key: scope_key)
+        tests = AppTest.where(scope_key: scope_key).page(params[:page]).per(params[:per])
 
-        render json: tests, each_serializer: TestSerializer
+        render json: {
+          tests: ActiveModel::SerializableResource.new(tests, each_serializer: TestSerializer),
+          meta: { total_pages: tests.total_pages,
+                  total_count: tests.total_count }
+        }
       end
 
       def show

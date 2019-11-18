@@ -53,3 +53,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'active_model_serializers'
 gem 'active_interaction', '~> 3.6'
+gem "kaminari", "~> 1.1"
