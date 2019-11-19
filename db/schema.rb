@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_18_044643) do
+ActiveRecord::Schema.define(version: 2019_11_19_041332) do
 
   create_table "answers", force: :cascade do |t|
     t.string "text"
@@ -36,6 +36,16 @@ ActiveRecord::Schema.define(version: 2019_11_18_044643) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["app_test_id"], name: "index_questions_on_app_test_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "nickname"
+    t.string "password_digest"
+    t.string "auth_token"
+    t.boolean "is_admin", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["nickname"], name: "index_users_on_nickname", unique: true
   end
 
 end

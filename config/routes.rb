@@ -16,6 +16,8 @@ Rails.application.routes.draw do
       post '/questions/:question_id/answers', to: 'answers#create'
       patch '/answers/:id', to: 'answers#update'
       delete '/answers/:id', to: 'answers#destroy'
+
+      post '/signup', to: 'users#create'
     end
   end
 end
