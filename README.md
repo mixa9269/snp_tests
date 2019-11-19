@@ -1,24 +1,94 @@
-# README
+## Вводная
+baseUrl: https://snp-tests.herokuapp.com/api/v1/
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+headers:
 
-Things you may want to cover:
+| Параметр  | Описание |
+| ------------- | ------------- |
+| scope-key  | Уникальный хэш, нужен, чтобы разделить данные между пользователями API. Сгенерировать можно, например, здесь http://md5.my-addr.com/online_random_md5_hash_generator-and-md5_random_hash.php или запросить у своего ментора  |
+| token  | Токен пользователя. Нужен для большинства запросов. Получить можно в ответе на авторизацию или регистрацию |
 
-* Ruby version
+## Регистрация
+post: /signup
 
-* System dependencies
+| Параметр  | Тип |
+| ------------- | ------------- |
+| username  | string |
+| password  | string |
+| password_confirmation  | string |
+| is_admin  | boolean |
 
-* Configuration
 
-* Database creation
+## Авторизация
+post: /signin
 
-* Database initialization
+| Параметр  | Тип |
+| ------------- | ------------- |
+| username  | string |
+| password  | string |
 
-* How to run the test suite
+## Получение юзера по токену
+get: /users/current
 
-* Services (job queues, cache servers, search engines, etc.)
+## Создание теста
+post: /tests
 
-* Deployment instructions
+| Параметр  | Тип |
+| ------------- | ------------- |
+| title  | string |
 
-* ...
+## Редактирование теста
+patch: /tests/:id
+
+## Удаление теста
+delete: /tests/:id
+
+## Получение теста
+get: /tests/:id/
+
+## Получение списка тестов с пагинацией
+get: /tests
+
+| Параметр  | Тип | default | Описание |
+| ------------- | ------------- | ------------- | ------------- | 
+| page  | number | 1 | страница | 
+| per  | number | 5 | количество элементов на странице |
+| search  | string |  | поиск по title, неполное вхождение, не зависит от регистра |
+
+## Создание вопроса
+post: /tests/:test_id/questions
+
+| Параметр  | Тип |
+| ------------- | ------------- |
+| title  | string |  |
+| question_type  | string ('single', 'multiple', 'number') |
+| answer  | number |
+
+## Редактирование вопроса
+patch: /questions/:id
+
+## Удаление вопроса
+delete: /questions/:id
+
+## Создание ответа
+post: /questions/:question_id/answers
+
+| Параметр  | Тип |
+| ------------- | ------------- |
+| text  | string |  |
+| is_right  | boolean |
+
+## Редактирование ответа
+patch: /answers/:id
+
+## Удаление ответа
+delete: /answers/:id
+
+
+
+
+
+
+
+
+
