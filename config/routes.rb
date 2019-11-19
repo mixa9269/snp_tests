@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
       post '/signup', to: 'users#create'
       post '/signin', to: 'sessions#create'
+      post '/users/current', to: 'users#current'
     end
   end
 end
