@@ -19,7 +19,11 @@ module Api
     end
 
     rescue_from Exceptions::UserNotFound do
-      render json: { error: 'user_not_found' }, status: :not_found 
+      render json: { error: 'user_not_found' }, status: :not_found
+    end
+
+    rescue_from Exceptions::UserIsNotAdmin do
+      render json: { error: 'user_is_not_admin' }, status: :bad_request
     end
 
     def scope_key
@@ -50,6 +54,12 @@ module Api
       token = request.headers['token']
       @user = User.find_by(auth_token: token)
       raise Exceptions::UserNotFound unless @user
+    end
+
+    def verify_admin
+      verify_auth_token
+
+      raise Exceptions::UserIsNotAdmin unless @user.is_admin
     end
   end
 end

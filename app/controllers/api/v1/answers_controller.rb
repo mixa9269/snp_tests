@@ -3,6 +3,8 @@
 module Api
   module V1
     class AnswersController < ApiController
+      before_action :verify_admin, only: %i[create update destroy]
+
       def create
         question = Question.find_by(id: params[:question_id])
 

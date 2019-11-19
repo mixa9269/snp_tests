@@ -6,4 +6,5 @@ module Exceptions
   class InvalidScopeKey < StandardError; end
   class InvalidQuestionType < StandardError; end
   class UserNotFound < StandardError; end
+  class UserIsNotAdmin < StandardError; end
 end
