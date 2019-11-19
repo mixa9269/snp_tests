@@ -39,13 +39,13 @@ ActiveRecord::Schema.define(version: 2019_11_19_041332) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "nickname"
+    t.string "username"
     t.string "password_digest"
     t.string "auth_token"
     t.boolean "is_admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["nickname"], name: "index_users_on_nickname", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
 end

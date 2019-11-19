@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       delete '/answers/:id', to: 'answers#destroy'
 
       post '/signup', to: 'users#create'
+      post '/signin', to: 'sessions#create'
     end
   end
 end

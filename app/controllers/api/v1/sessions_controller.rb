@@ -2,10 +2,15 @@
 
 module Api
   module V1
-    class UsersController < ApiController
+    class SessionsController < ApiController
       def create
-        outcome = Users::Create.run(user_params)
-        render_single_outcome(outcome, UserSerializer)
+        user = User.find_by(username: params[:username]).try(:authenticate, params[:password])
+
+        if user
+          render json: user, serializer: UserSerializer
+        else
+          render json: { error: 'username or password is invalid' }
+        end
       end
 
       private
