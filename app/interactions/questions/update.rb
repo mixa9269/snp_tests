@@ -6,7 +6,7 @@ module Questions
 
     object :question
     string :title, :question_type
-    string :answer, default: nil
+    integer :answer, default: nil
     validates :title, :question_type, presence: true
     validate :validate_question_type
 
