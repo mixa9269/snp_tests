@@ -9,7 +9,7 @@ module Api
         if user
           render json: user, serializer: UserSerializer
         else
-          render json: { error: 'username or password is invalid' }
+          render json: { error: 'username or password is invalid' }, status: :bad_request
         end
       end
 
