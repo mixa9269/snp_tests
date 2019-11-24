@@ -55,3 +55,5 @@ gem 'active_model_serializers'
 gem 'active_interaction', '~> 3.6'
 gem "kaminari", "~> 1.1"
 gem 'bcrypt'
+
+gem 'rack-cors'

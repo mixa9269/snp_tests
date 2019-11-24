@@ -34,5 +34,12 @@ module SnpTests
     config.autoload_paths += Dir.glob("#{config.root}/app/interactions/*")
     config.autoload_paths += Dir.glob("#{config.root}/app/helpers/*")
     config.api_only = true
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: [:get, :post, :options]
+      end
+    end
   end
 end
