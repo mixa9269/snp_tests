@@ -57,3 +57,4 @@ gem "kaminari", "~> 1.1"
 gem 'bcrypt'
 
 gem 'rack-cors'
+gem 'acts_as_list'

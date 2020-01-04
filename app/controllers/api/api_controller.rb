@@ -50,6 +50,10 @@ module Api
       render json: { status: 'ok' }, status: :ok
     end
 
+    def render_insert_at_success
+      render json: { status: 'ok' }, status: :ok
+    end
+
     def verify_auth_token
       token = request.headers['token']
       @user = User.find_by(auth_token: token)

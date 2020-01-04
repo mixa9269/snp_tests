@@ -3,7 +3,7 @@
 module Api
   module V1
     class AnswersController < ApiController
-      before_action :verify_admin, only: %i[create update destroy]
+      before_action :verify_admin, only: %i[create update insert_at destroy]
 
       def create
         question = Question.find_by(id: params[:question_id])
@@ -36,6 +36,22 @@ module Api
 
         answer.destroy
         render_destroy_success
+      end
+
+      def insert_at
+        answer = Answer.find_by(id: params[:id])
+
+        raise Exceptions::NotFound unless answer
+
+        verify_scope_key(answer.question.app_test.scope_key)
+
+        outcome = Answers::InsertAt.run(answer: answer, position: params[:position])
+
+        if outcome.valid?
+          render_insert_at_success
+        else
+          render json: outcome.errors, status: :bad_request
+        end
       end
 
       private
