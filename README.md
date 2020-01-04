@@ -5,7 +5,7 @@ headers:
 
 | Параметр  | Описание |
 | ------------- | ------------- |
-| scope-key  | Уникальный хэш, нужен, чтобы разделить данные между пользователями API. Сгенерировать можно, например, здесь http://md5.my-addr.com/online_random_md5_hash_generator-and-md5_random_hash.php или запросить у своего ментора  |
+| scope-key  | Уникальный хэш. Нужен, чтобы разделить данные между пользователями API. Сгенерировать можно, например, здесь http://md5.my-addr.com/online_random_md5_hash_generator-and-md5_random_hash.php или запросить у своего ментора  |
 | token  | Токен пользователя. Нужен для большинства запросов. Получить можно в ответе на авторизацию или регистрацию |
 
 ## Регистрация
@@ -80,6 +80,9 @@ post: /questions/:question_id/answers
 
 ## Редактирование ответа
 patch: /answers/:id
+
+## Перемещение ответа
+patch: /answers/:id/insert_at/:position
 
 ## Удаление ответа
 delete: /answers/:id
