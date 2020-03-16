@@ -34,5 +34,8 @@ module SnpTests
     config.autoload_paths += Dir.glob("#{config.root}/app/interactions/*")
     config.autoload_paths += Dir.glob("#{config.root}/app/helpers/*")
     config.api_only = true
+
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
   end
 end

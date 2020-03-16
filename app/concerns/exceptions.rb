@@ -7,4 +7,5 @@ module Exceptions
   class InvalidQuestionType < StandardError; end
   class UserNotFound < StandardError; end
   class UserIsNotAdmin < StandardError; end
+  class Unauthenticated < StandardError; end
 end

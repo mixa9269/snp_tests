@@ -4,7 +4,7 @@ module Api
   module V1
     class AppTestsController < ApiController
       before_action :check_scope_key_exists, only: %i[create index]
-      before_action :verify_auth_token, only: %i[index show]
+      before_action :authenticate, only: %i[index show]
       before_action :verify_admin, only: %i[create update destroy]
 
       def create

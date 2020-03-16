@@ -22,6 +22,10 @@ module Api
       render json: { error: 'user_not_found' }, status: :not_found
     end
 
+    rescue_from Exceptions::Unauthenticated do
+      render json: { error: 'Authentication is required to perform this request' }, status: :unauthorized
+    end
+
     rescue_from Exceptions::UserIsNotAdmin do
       render json: { error: 'user_is_not_admin' }, status: :bad_request
     end
@@ -54,16 +58,32 @@ module Api
       render json: { status: 'ok' }, status: :ok
     end
 
-    def verify_auth_token
-      token = request.headers['token']
-      @user = User.find_by(auth_token: token)
-      raise Exceptions::UserNotFound unless @user
+    def log_in(user)
+      session[:user_id] = user.id
+    end
+
+    def current_user
+      if @current_user
+        @current_user
+      elsif (token = request.headers['token'])
+        @current_user = User.find_by(auth_token: token)
+      elsif (user_id = session[:user_id])
+        @current_user = User.find_by(id: user_id)
+      end
+    end
+
+    def signed_in?
+      current_user.present?
+    end
+
+    def authenticate
+      signed_in? || (raise ::Exceptions::Unauthenticated)
     end
 
     def verify_admin
-      verify_auth_token
+      authenticate
 
-      raise Exceptions::UserIsNotAdmin unless @user.is_admin
+      raise Exceptions::UserIsNotAdmin unless current_user.is_admin
     end
   end
 end
