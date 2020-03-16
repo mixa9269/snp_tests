@@ -29,6 +29,9 @@ post: /signin
 ## Получение текущего юзера
 get: /users/current
 
+## Logout
+delete: /logout
+
 ## Создание теста
 post: /tests
 
