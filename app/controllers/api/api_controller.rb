@@ -42,6 +42,14 @@ module Api
       raise Exceptions::InvalidScopeKey if key != scope_key
     end
 
+    def process_outcome(outcome)
+      if outcome.invalid?
+        render json: outcome.errors, status: :bad_request
+      elsif block_given?
+        yield outcome.result
+      end
+    end
+
     def render_single_outcome(outcome, serializer)
       if outcome.valid?
         render json: outcome.result, serializer: serializer

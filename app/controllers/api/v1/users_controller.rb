@@ -6,9 +6,10 @@ module Api
       before_action :authenticate, only: %i[current]
 
       def create
-        outcome = Users::Create.run(user_params)
-        log_in(outcome.result)
-        render_single_outcome(outcome, UserSerializer)
+        process_outcome(Users::Create.run(user_params)) do |result|
+          log_in(result)
+          render json: result, status: :created
+        end
       end
 
       def current
