@@ -11,7 +11,7 @@ module Answers
 
     def execute
       answer.text = text if text
-      answer.is_right = is_right if is_right
+      answer.is_right = is_right if is_right.present?
 
       errors.merge!(answer.errors) unless answer.save
 
