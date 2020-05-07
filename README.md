@@ -56,6 +56,7 @@ get: /tests
 | page  | number | 1 | страница | 
 | per  | number | 5 | количество элементов на странице |
 | search  | string |  | поиск по title, неполное вхождение, не зависит от регистра |
+| sort  | string | created_at_desc | сортировка. Может быть created_at_asc или created_at_desc |
 
 ## Создание вопроса
 post: /tests/:test_id/questions
