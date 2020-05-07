@@ -30,6 +30,10 @@ module Api
       render json: { error: 'user_is_not_admin' }, status: :bad_request
     end
 
+    rescue_from Exceptions::InvalidRequestData do
+      render json: { error: 'Invalid request data' }, status: :bad_request
+    end
+
     def scope_key
       request.headers['scope-key']
     end

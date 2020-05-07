@@ -8,4 +8,5 @@ module Exceptions
   class UserNotFound < StandardError; end
   class UserIsNotAdmin < StandardError; end
   class Unauthenticated < StandardError; end
+  class InvalidRequestData < StandardError; end
 end

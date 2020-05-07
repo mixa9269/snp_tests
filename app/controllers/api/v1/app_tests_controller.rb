@@ -36,6 +36,7 @@ module Api
       def index
         tests = AppTest.where(scope_key: scope_key)
                        .where('lower(title) LIKE :search', search: "%#{params[:search]}%")
+                       .order(sort)
                        .page(params[:page])
                        .per(params[:per])
 
@@ -70,6 +71,13 @@ module Api
           app_test: app_test,
           title: params[:title],
         }
+      end
+
+      def sort
+        res = params[:sort] || 'created_at_desc'
+        raise ::Exceptions::InvalidRequestData unless %w[created_at_asc created_at_desc].include? res
+
+        res.gsub('_asc', ' asc').gsub('_desc', ' desc')
       end
     end
   end
