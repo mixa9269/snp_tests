@@ -7,6 +7,8 @@ headers:
 | ------------- | ------------- |
 | scope-key  | Уникальная строка. Нужна, чтобы разделить данные между пользователями API. Сгенерировать можно, например, здесь https://passwordsgenerator.net/ или запросить у своего ментора  |
 
+Если у вас возникли вопросы, проверьте нет ли ответов [здесь](#faq)
+
 ## Регистрация
 post: /signup
 
@@ -56,6 +58,7 @@ get: /tests
 | page  | number | 1 | страница | 
 | per  | number | 5 | количество элементов на странице |
 | search  | string |  | поиск по title, неполное вхождение, не зависит от регистра |
+| sort  | string | created_at_desc | сортировка. Может быть created_at_asc или created_at_desc |
 
 ## Создание вопроса
 post: /tests/:test_id/questions
@@ -89,11 +92,15 @@ patch: /answers/:id/insert_at/:position
 ## Удаление ответа
 delete: /answers/:id
 
+# FAQ
+### Я авторизовался и все равно получаю ошибку "Authentication is required to perfom this request"
+Добавьте withCredentials = true
+Если используете axios это можно сделать так:
+```
+import axios from 'axios';
+axios.defaults.withCredentials = true;
+```
+После этого заново авторизуйтесь
 
-
-
-
-
-
-
-
+### Локально у меня все работает, но после деплоя запросы не проходят.
+Сообщите об этом ментору и напишите адрес сайта.
